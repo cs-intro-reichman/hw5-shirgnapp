@@ -122,7 +122,13 @@ public class MyString {
      * @param str2 - a string
      * @return a string consisting of str1 minus all the characters of str2
      */
-    public static String remove(String str1, String str2) {
+    public static String remove1(String str1, String str2) {
+        if (str1 == "") {
+            return str2;
+        }
+        if (str2 == "") {
+            return str2;
+        }
         char[] charArray = new char[str1.length()];
         String Newstring = "";
         for(int i=0; i<str1.length(); i++){
@@ -139,6 +145,30 @@ public class MyString {
             }
         }
     return Newstring;
+}
+public static String remove(String str2, String str1) {
+    if (str1 == "") {
+        return str2;
+    }
+    if (str2 == "") {
+        return str2;
+    }
+    char[] charArray = new char[str1.length()];
+    String Newstring = "";
+    for(int i=0; i<str1.length(); i++){
+        charArray[i] = str1.charAt(i);
+    }
+    for(int i=0; i<str2.length(); i++){
+        for(int j=0; j<charArray.length; j++){
+            if (str2.charAt(i) == charArray[j]) {
+                charArray[j] = 0;
+                break;
+            }
+            if (str2.charAt(i) != charArray[j] && j == charArray.length-1)
+            Newstring += str2.charAt(i);
+        }
+    }
+return Newstring;
 }
     /**
      * Returns a string consisting of the given string, with the given 
