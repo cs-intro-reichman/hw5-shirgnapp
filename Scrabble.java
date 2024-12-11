@@ -248,6 +248,8 @@ public class Scrabble {
 			score += wordScore(input);
 			hand = remove(hand, input);
 			}
+			else
+			System.out.println("Invalid word. Try again");
 		}
 		if (hand.length() == 0) {
 	        System.out.println("Ran out of letters. Total score: " + score + " points");
