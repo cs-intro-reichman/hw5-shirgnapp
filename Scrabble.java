@@ -1,6 +1,9 @@
 /*
  * RUNI version of the Scrabble game.
  */
+
+import java.util.Dictionary;
+
 public class Scrabble {
 
 	// Note 1: "Class variables", like the five class-level variables declared below,
@@ -48,7 +51,11 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		//// Replace the following statement with your code
+		for(int i=0; i<DICTIONARY.length; i++){
+			if (DICTIONARY[i].equals(word)) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -56,18 +63,123 @@ public class Scrabble {
 	// If the length of the word equals the length of the hand, adds 50 points to the score.
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
-		//// Replace the following statement with your code
-		return 0;
+		int count = 0;
+		for(int i=0; i<word.length(); i++){
+			count+= SCRABBLE_LETTER_VALUES[word.charAt(i)- 97];
+			//if (word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'n' || word.charAt(i) =='l' || word.charAt(i) == 'i' ||  word.charAt(i) == 'u' || word.charAt(i) == 't' || word.charAt(i) == 's' || word.charAt(i) == 'r' ||word.charAt(i) == 'o') {
+			//	count+=1;
+			//}
+			//if (word.charAt(i) == 'b'|| word.charAt(i) == 'c' || word.charAt(i) == 'm'|| word.charAt(i) == 'p' ){
+		//		count+=3;
+		//	}
+		//	if (word.charAt(i) == 'd'|| word.charAt(i) == 'g' ){
+		//		count+=2;
+		//	}
+		//	if (word.charAt(i) == 'f'|| word.charAt(i) == 'h' || word.charAt(i) == 'y'|| word.charAt(i) == 'w' || word.charAt(i) == 'v'){
+		//		count+=4;
+		//	}
+		//	if (word.charAt(i) == 'k'){
+		//		count+=5;
+		//	}
+		//	if (word.charAt(i) == 'j'|| word.charAt(i) == 'x' ){
+		//		count+=8;
+		//	}
+		//	if (word.charAt(i) == 'q'|| word.charAt(i) == 'z' ){
+		//		count+=10;
+		//	}
+		}
+		if (subsetOf("runi", word)) {
+			count+=1000;
+		}
+		if (word.length() == HAND_SIZE) {
+			count+=50;
+		}
+		return count;
 	}
+	public static int countChar(String str, char ch) {
+        int counter = 0;
+        for(int i=0; i<str.length(); i++){
+            if(str.charAt(i) == ch)
+            counter++;
+        }
+        return counter;
+    }
+	public static boolean subsetOf(String str1, String str2) {
+        for(int i=0; i<str1.length(); i++){ // ("pass"
+            for(int j=0; j<str2.length(); j++){ // ,"space")
+                if (str1.charAt(i) == str2.charAt(j)) {
+                    int cheackStr1 = countChar(str1, str1.charAt(i));
+                    int cheackStr2 = countChar(str2, str2.charAt(j));
+                    if (cheackStr1 != cheackStr2) {
+                        return false;
+                   }
+                    break;
+                }
+            }
+        }
+        return true;
+    }
+	public static String insertRandomly(char ch, String str) {
+		// Generate a random index between 0 and str.length()
+		int randomIndex = (int) (Math.random() * (str.length() + 1));
+		// Insert the character at the random index
+		String result = str.substring(0, randomIndex) + ch + str.substring(randomIndex);
+		return result;
+   }    
+   public static String randomStringOfLetters(int n) {
+	String str = "";
+	char c;
+	 for(int i =0; i<n; i++){
+	 double random = (Math.random()) * 26;
+	 c = (char)('a' + random);
+	 str += c;
+	 }
+	 return str;
+ }
 
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
 	// into it, at random indexes, the letters 'a' and 'e'
 	// (these two vowels make it easier for the user to construct words)
 	public static String createHand() {
-		//// Replace the following statement with your code
-		return null;
+		char[] createHand = new char[HAND_SIZE-2];
+		String str = randomStringOfLetters(HAND_SIZE-2);
+		for(int i=0; i< createHand.length; i++){
+			createHand[i] = str.charAt(i);
+		}
+		int random1 = (int)((Math.random()) * HAND_SIZE-2);
+		int random2 = (int)((Math.random()) * HAND_SIZE-2);
+		createHand[random1] = 'e';
+		createHand[random2] = 'a';
+		String NewStr = "";
+		for(int i=0; i<createHand.length; i++){
+			NewStr+= createHand[i];
+		}
+		return NewStr;
 	}
-	
+	public static String remove(String str2, String str1) {
+		if (str1 == "") {
+			return str2;
+		}
+		if (str2 == "") {
+			return str2;
+		}
+		char[] charArray = new char[str1.length()];
+		String Newstring = "";
+		for(int i=0; i<str1.length(); i++){
+			charArray[i] = str1.charAt(i);
+		}
+		for(int i=0; i<str2.length(); i++){
+			for(int j=0; j<charArray.length; j++){
+				if (str2.charAt(i) == charArray[j]) {
+					charArray[j] = 0;
+					break;
+				}
+				if (str2.charAt(i) != charArray[j] && j == charArray.length-1)
+				Newstring += str2.charAt(i);
+			}
+		}
+	return Newstring;
+	}
     // Runs a single hand in a Scrabble game. Each time the user enters a valid word:
     // 1. The letters in the word are removed from the hand, which becomes smaller.
     // 2. The user gets the Scrabble points of the entered word.
@@ -85,9 +197,15 @@ public class Scrabble {
 			// non-whitespace characters. Whitespace is either space characters, or  
 			// end-of-line characters.
 			String input = in.readString();
-			//// Replace the following break statement with code
-			//// that completes the hand playing loop
-			break;
+			if (input.equals(".")) {
+				//// Replace the following break statement with code
+				//// that completes the hand playing loop
+				break;
+			}
+			if (isWordInDictionary(input)) {
+			score += wordScore(input);
+			hand = remove(hand, input);
+			}
 		}
 		if (hand.length() == 0) {
 	        System.out.println("Ran out of letters. Total score: " + score + " points");
@@ -104,15 +222,24 @@ public class Scrabble {
 		// The variable in is set to represent the stream of characters 
 		// coming from the keyboard. Used for getting the user's inputs.  
 		In in = new In();
-
 		while(true) {
 			System.out.println("Enter n to deal a new hand, or e to end the game:");
 			// Gets the user's input, which is all the characters entered by 
 			// the user until the user enter the ENTER character.
 			String input = in.readString();
-			//// Replace the following break statement with code
-			//// that completes the game playing loop
-			break;
+			if(input.equals("n")){
+				String str = createHand();
+				playHand(str);
+			}
+			if(input.equals("e")){
+				System.out.println("Thanks for playing!");
+				break;
+			}
+			if(!input.equals("e") && !input.equals("n")){
+				System.out.println("Error. Try again");
+
+			}
+
 		}
 	}
 
