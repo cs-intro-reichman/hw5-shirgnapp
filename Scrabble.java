@@ -89,9 +89,9 @@ public class Scrabble {
 			if (word.charAt(i) == 'q'|| word.charAt(i) == 'z' ){
 				count+=10;
 			}
-		if (word.charAt(i) >= 'a' && word.charAt(i) <= 'z') {
-				count+= SCRABBLE_LETTER_VALUES[word.charAt(i)- 97];
-			}
+		//if (word.charAt(i) >= 'a' && word.charAt(i) <= 'z') {
+		//		count+= SCRABBLE_LETTER_VALUES[word.charAt(i)- 97];
+		//	}
 		}
 		if (subsetOf("runi", word)) {
 			count+=1000;
