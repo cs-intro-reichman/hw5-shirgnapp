@@ -243,7 +243,7 @@ public class Scrabble {
 				break;
 			}
 			 if (!isWordInDictionary(input)) {
-				System.out.println("Invalid word. Try again.");
+				System.out.println("No such word in the dictionary. Try again.");
 			} 
 			else if (!subsetOf(input, hand)) { 
 				System.out.println("Invalid word. Try again.");
