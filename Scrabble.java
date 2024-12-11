@@ -248,8 +248,10 @@ public class Scrabble {
 				if (!subsetOf(input, hand)) { 
 					System.out.println("Invalid word. Try again.");
 				}
+				else {
 			score += wordScore(input);
 			hand = remove(hand, input);
+				}
 			}
 			else
 			System.out.println("Invalid word. Try again");
