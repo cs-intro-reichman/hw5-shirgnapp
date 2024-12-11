@@ -294,7 +294,6 @@ public class Scrabble {
 				playHand(str);
 			}
 			if(input.equals("e")){
-				System.out.println("Thanks for playing!");
 				break;
 			}
 			if(!input.equals("e") && !input.equals("n")){
