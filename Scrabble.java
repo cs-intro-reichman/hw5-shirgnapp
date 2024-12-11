@@ -51,7 +51,7 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		for(int i=0; i<DICTIONARY.length; i++){
+		for(int i=0; i<NUM_OF_WORDS; i++){
 			if (DICTIONARY[i].equals(word)) {
 				return true;
 			}
@@ -146,8 +146,8 @@ public class Scrabble {
 		for(int i=0; i< createHand.length; i++){
 			createHand[i] = str.charAt(i);
 		}
-		int random1 = (int)((Math.random()) * HAND_SIZE-2);
-		int random2 = (int)((Math.random()) * HAND_SIZE-2);
+		int random1 = (int)((Math.random()) * (HAND_SIZE-2));
+		int random2 = (int)((Math.random()) * (HAND_SIZE-2));
 		createHand[random1] = 'e';
 		createHand[random2] = 'a';
 		String NewStr = "";
@@ -244,12 +244,12 @@ public class Scrabble {
 	}
 
 	public static void main(String[] args) {
-		//// Uncomment the test you want to run
-		////testBuildingTheDictionary();  
-		////testScrabbleScore();    
-		////testCreateHands();  
-		////testPlayHands();
-		////playGame();
+		//Uncomment the test you want to run
+		testBuildingTheDictionary();  
+		testScrabbleScore();    
+		testCreateHands();  
+		testPlayHands();
+		playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
