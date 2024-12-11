@@ -254,6 +254,7 @@ public class Scrabble {
 				System.out.println(input + " earned " + wordPoints + " points. Score: " + score + " points");
 				hand = remove(hand, input);
 			}
+			System.out.println();
 		}
 			
 		//	if (isWordInDictionary(input)) {
