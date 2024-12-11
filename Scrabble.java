@@ -63,6 +63,9 @@ public class Scrabble {
 	// If the length of the word equals the length of the hand, adds 50 points to the score.
 	// If the word includes the sequence "runi", adds 1000 points to the game.
 	public static int wordScore(String word) {
+		if (word.equals("")) {
+			return 0;
+		}
 		int count = 0;
 		for(int i=0; i<word.length(); i++){
 			count+= SCRABBLE_LETTER_VALUES[word.charAt(i)- 97];
@@ -91,6 +94,7 @@ public class Scrabble {
 		if (subsetOf("runi", word)) {
 			count+=1000;
 		}
+	
 		if (word.length() == HAND_SIZE) {
 			count+=50;
 		}
@@ -104,21 +108,31 @@ public class Scrabble {
         }
         return counter;
     }
-	public static boolean subsetOf(String str1, String str2) {
-        for(int i=0; i<str1.length(); i++){ // ("pass"
-            for(int j=0; j<str2.length(); j++){ // ,"space")
-                if (str1.charAt(i) == str2.charAt(j)) {
-                    int cheackStr1 = countChar(str1, str1.charAt(i));
-                    int cheackStr2 = countChar(str2, str2.charAt(j));
-                    if (cheackStr1 != cheackStr2) {
-                        return false;
-                   }
-                    break;
-                }
-            }
+	//public static boolean subsetOf(String str1, String str2) {
+      //  for(int i=0; i<str1.length(); i++){ // ("pass"
+        //    for(int j=0; j<str2.length(); j++){ // ,"space")
+          //      if (str1.charAt(i) == str2.charAt(j)) {
+            //        int cheackStr1 = countChar(str1, str1.charAt(i));
+              //      int cheackStr2 = countChar(str2, str2.charAt(j));
+                //    if (cheackStr1 != cheackStr2) {
+                  //      return false;
+                   //}
+                    //break;
+               // }
+           // }
+       // }
+       // return true;
+   // }
+   public static boolean subsetOf(String str1, String str2) {
+    for (int i = 0; i < str1.length(); i++) {
+        int countStr1 = countChar(str1, str1.charAt(i)); 
+        int countStr2 = countChar(str2, str1.charAt(i)); 
+        if (countStr2 < countStr1) {
+            return false; 
         }
-        return true;
     }
+    return true;
+}
 	public static String insertRandomly(char ch, String str) {
 		// Generate a random index between 0 and str.length()
 		int randomIndex = (int) (Math.random() * (str.length() + 1));
@@ -141,13 +155,13 @@ public class Scrabble {
 	// into it, at random indexes, the letters 'a' and 'e'
 	// (these two vowels make it easier for the user to construct words)
 	public static String createHand() {
-		char[] createHand = new char[HAND_SIZE-2];
-		String str = randomStringOfLetters(HAND_SIZE-2);
+		char[] createHand = new char[HAND_SIZE];
+		String str = randomStringOfLetters(HAND_SIZE);
 		for(int i=0; i< createHand.length; i++){
 			createHand[i] = str.charAt(i);
 		}
-		int random1 = (int)((Math.random()) * (HAND_SIZE-2));
-		int random2 = (int)((Math.random()) * (HAND_SIZE-2));
+		int random1 = (int)((Math.random()) * (HAND_SIZE));
+		int random2 = (int)((Math.random()) * (HAND_SIZE));
 		createHand[random1] = 'e';
 		createHand[random2] = 'a';
 		String NewStr = "";
