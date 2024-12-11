@@ -8,7 +8,13 @@ public class MyString {
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
         System.out.println(spacedString(hello));
-        //// Put your other tests here.
+        System.out.println(subsetOf("sap","space"));
+        System.out.println(subsetOf("spa","space"));
+        System.out.println(subsetOf("pass","space"));
+        System.out.println(subsetOf("c","space"));
+        System.out.println(randomStringOfLetters(3) );
+        System.out.println(remove("meet","committee"));
+        System.out.println(insertRandomly('s',"cat"));
     }
 
     /**
@@ -20,8 +26,12 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int counter = 0;
+        for(int i=0; i<str.length(); i++){
+            if(str.charAt(i) == ch)
+            counter++;
+        }
+        return counter;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -36,8 +46,19 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
+        for(int i=0; i<str1.length(); i++){ // ("pass"
+            for(int j=0; j<str2.length(); j++){ // ,"space")
+                if (str1.charAt(i) == str2.charAt(j)) {
+                    int cheackStr1 = countChar(str1, str1.charAt(i));
+                    int cheackStr2 = countChar(str2, str2.charAt(j));
+                    if (cheackStr1 != cheackStr2) {
+                        return false;
+                   }
+                    break;
+                }
+            }
+        }
+        return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -49,10 +70,17 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+       String NewStr = "";
+       for(int i=0; i<str.length(); i++){
+        NewStr += str.charAt(i);
+        if (i == str.length()-1) {
+            return NewStr;
+        }
+        NewStr += " ";
+       }
+        return NewStr;
     }
-  
+
     /**
      * Returns a string of n lowercase letters, selected randomly from 
      * the English alphabet 'a', 'b', 'c', ..., 'z'. Note that the same
@@ -64,24 +92,84 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+       String str = "";
+       char c;
+        for(int i =0; i<n; i++){
+        double random = (Math.random()) * 26;
+        c = (char)('a' + random);
+        str += c;
+        }
+        return str;
+    }
+
+    public static int index(String str1, String str2) {
+        for(int i=0; i< str1.length(); i++){
+            for(int j=0; j<str2.length(); j++)
+                if (str2.charAt(j) == str1.charAt(i)){
+                   return j;
+            }    
+        }
+        return -1;
     }
 
     /**
      * Returns a string consisting of the string str1, minus all the characters in the
      * string str2. Assumes (without checking) that str2 is a subset of str1.
      * Example: remove("meet","committee") returns "comit" 
+     * "meet","comimttee"
      * 
      * @param str1 - a string
      * @param str2 - a string
      * @return a string consisting of str1 minus all the characters of str2
      */
-    public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+    public static String remove1(String str1, String str2) {
+        if (str1 == "") {
+            return str2;
+        }
+        if (str2 == "") {
+            return str2;
+        }
+        char[] charArray = new char[str1.length()];
+        String Newstring = "";
+        for(int i=0; i<str1.length(); i++){
+            charArray[i] = str1.charAt(i);
+        }
+        for(int i=0; i<str2.length(); i++){
+            for(int j=0; j<charArray.length; j++){
+                if (str2.charAt(i) == charArray[j]) {
+                    charArray[j] = 0;
+                    break;
+                }
+                if (str2.charAt(i) != charArray[j] && j == charArray.length-1)
+                Newstring += str2.charAt(i);
+            }
+        }
+    return Newstring;
+}
+public static String remove(String str2, String str1) {
+    if (str1 == "") {
+        return str2;
     }
-
+    if (str2 == "") {
+        return str2;
+    }
+    char[] charArray = new char[str1.length()];
+    String Newstring = "";
+    for(int i=0; i<str1.length(); i++){
+        charArray[i] = str1.charAt(i);
+    }
+    for(int i=0; i<str2.length(); i++){
+        for(int j=0; j<charArray.length; j++){
+            if (str2.charAt(i) == charArray[j]) {
+                charArray[j] = 0;
+                break;
+            }
+            if (str2.charAt(i) != charArray[j] && j == charArray.length-1)
+            Newstring += str2.charAt(i);
+        }
+    }
+return Newstring;
+}
     /**
      * Returns a string consisting of the given string, with the given 
      * character inserted randomly somewhere in the string.
