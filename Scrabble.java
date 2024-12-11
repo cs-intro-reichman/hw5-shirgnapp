@@ -187,6 +187,9 @@ public class Scrabble {
 		}
 		int random1 = (int)((Math.random()) * (HAND_SIZE));
 		int random2 = (int)((Math.random()) * (HAND_SIZE));
+		while (random1 == random2) {
+			 random2 = (int)((Math.random()) * (HAND_SIZE));
+		}
 		createHand[random1] = 'e';
 		createHand[random2] = 'a';
 		String NewStr = "";
