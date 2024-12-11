@@ -240,22 +240,34 @@ public class Scrabble {
 			// end-of-line characters.
 			String input = in.readString();
 			if (input.equals(".")) {
-				//// Replace the following break statement with code
-				//// that completes the hand playing loop
 				break;
 			}
-			if (isWordInDictionary(input)) {
-				if (!subsetOf(input, hand)) { 
-					System.out.println("Invalid word. Try again.");
-				}
-				else {
-			score += wordScore(input);
-			hand = remove(hand, input);
-				}
+			 if (!isWordInDictionary(input)) {
+				System.out.println("Invalid word. Try again.");
+			} 
+			else if (!subsetOf(input, hand)) { 
+				System.out.println("Invalid word. Try again.");
+			} 
+			else {
+				int wordPoints = wordScore(input);
+				score += wordPoints;
+				System.out.println(input + " earned " + wordPoints + " points. Score: " + score + " points");
+				hand = remove(hand, input);
 			}
-			else
-			System.out.println("Invalid word. Try again");
 		}
+			
+		//	if (isWordInDictionary(input)) {
+		//		if (!subsetOf(input, hand)) { 
+		//			System.out.println("Invalid word. Try again.");
+		//		}
+		//		else {
+		//	score += wordScore(input);
+		//	hand = remove(hand, input);
+		///		}
+			//}
+			//else
+			//System.out.println("Invalid word. Try again");
+	//	}
 		if (hand.length() == 0) {
 	        System.out.println("Ran out of letters. Total score: " + score + " points");
 		} else {
