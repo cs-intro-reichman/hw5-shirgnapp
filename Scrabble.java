@@ -68,8 +68,22 @@ public class Scrabble {
 		}
 		int count = 0;
 		for(int i=0; i<word.length(); i++){
-			count+= SCRABBLE_LETTER_VALUES[word.charAt(i)- 97];
-			//if (word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'n' || word.charAt(i) =='l' || word.charAt(i) == 'i' ||  word.charAt(i) == 'u' || word.charAt(i) == 't' || word.charAt(i) == 's' || word.charAt(i) == 'r' ||word.charAt(i) == 'o') {
+			if (word.charAt(i) >= 'a' && word.charAt(i) <= 'z') {
+				count+= SCRABBLE_LETTER_VALUES[word.charAt(i)- 97];
+			}
+		}
+		if (subsetOf("runi", word)) {
+			count+=1000;
+		}
+	
+		if (word.length() == HAND_SIZE) {
+			count+=50;
+		}
+		
+		return count;
+		
+	}
+	//if (word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'n' || word.charAt(i) =='l' || word.charAt(i) == 'i' ||  word.charAt(i) == 'u' || word.charAt(i) == 't' || word.charAt(i) == 's' || word.charAt(i) == 'r' ||word.charAt(i) == 'o') {
 			//	count+=1;
 			//}
 			//if (word.charAt(i) == 'b'|| word.charAt(i) == 'c' || word.charAt(i) == 'm'|| word.charAt(i) == 'p' ){
@@ -90,16 +104,6 @@ public class Scrabble {
 		//	if (word.charAt(i) == 'q'|| word.charAt(i) == 'z' ){
 		//		count+=10;
 		//	}
-		}
-		if (subsetOf("runi", word)) {
-			count+=1000;
-		}
-	
-		if (word.length() == HAND_SIZE) {
-			count+=50;
-		}
-		return count;
-	}
 	public static int countChar(String str, char ch) {
         int counter = 0;
         for(int i=0; i<str.length(); i++){
