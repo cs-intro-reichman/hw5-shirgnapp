@@ -245,6 +245,9 @@ public class Scrabble {
 				break;
 			}
 			if (isWordInDictionary(input)) {
+				if (!subsetOf(input, hand)) { 
+					System.out.println("Invalid word. Try again.");
+				}
 			score += wordScore(input);
 			hand = remove(hand, input);
 			}
