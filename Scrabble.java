@@ -68,31 +68,32 @@ public class Scrabble {
 		}
 		int count = 0;
 		for(int i=0; i<word.length(); i++){
-			if (word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'n' || word.charAt(i) =='l' || word.charAt(i) == 'i' ||  word.charAt(i) == 'u' || word.charAt(i) == 't' || word.charAt(i) == 's' || word.charAt(i) == 'r' ||word.charAt(i) == 'o') {
-			count+=1;
-			}
-			if (word.charAt(i) == 'b'|| word.charAt(i) == 'c' || word.charAt(i) == 'm'|| word.charAt(i) == 'p' ){
-			count+=3;
-			}
-			if (word.charAt(i) == 'd'|| word.charAt(i) == 'g' ){
-				count+=2;
-			}
-			if (word.charAt(i) == 'f'|| word.charAt(i) == 'h' || word.charAt(i) == 'y'|| word.charAt(i) == 'w' || word.charAt(i) == 'v'){
-				count+=4;
-			}
-			if (word.charAt(i) == 'k'){
-				count+=5;
-			}
-			if (word.charAt(i) == 'j'|| word.charAt(i) == 'x' ){
-				count+=8;
-			}
-			if (word.charAt(i) == 'q'|| word.charAt(i) == 'z' ){
-				count+=10;
-			}
-		//if (word.charAt(i) >= 'a' && word.charAt(i) <= 'z') {
-		//		count+= SCRABBLE_LETTER_VALUES[word.charAt(i)- 97];
+		//	if (word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'n' || word.charAt(i) =='l' || word.charAt(i) == 'i' ||  word.charAt(i) == 'u' || word.charAt(i) == 't' || word.charAt(i) == 's' || word.charAt(i) == 'r' ||word.charAt(i) == 'o') {
+		//	count+=1;
 		//	}
+		//	if (word.charAt(i) == 'b'|| word.charAt(i) == 'c' || word.charAt(i) == 'm'|| word.charAt(i) == 'p' ){
+		//	count+=3;
+		//	}
+		//	if (word.charAt(i) == 'd'|| word.charAt(i) == 'g' ){
+		//		count+=2;
+		//	}
+		//	if (word.charAt(i) == 'f'|| word.charAt(i) == 'h' || word.charAt(i) == 'y'|| word.charAt(i) == 'w' || word.charAt(i) == 'v'){
+		//		count+=4;
+		//	}
+		//	if (word.charAt(i) == 'k'){
+		//		count+=5;
+		//	}
+		//	if (word.charAt(i) == 'j'|| word.charAt(i) == 'x' ){
+		//		count+=8;
+		//	}
+		//	if (word.charAt(i) == 'q'|| word.charAt(i) == 'z' ){
+		//		count+=10;
+		
+		if (word.charAt(i) >= 'a' && word.charAt(i) <= 'z') {
+				count+= SCRABBLE_LETTER_VALUES[word.charAt(i)- 97];
+			}
 		}
+		count *= word.length();
 		if (subsetOf("runi", word)) {
 			count+=1000;
 		}
@@ -102,7 +103,6 @@ public class Scrabble {
 		}
 		
 		return count;
-		
 	}
 	//if (word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'n' || word.charAt(i) =='l' || word.charAt(i) == 'i' ||  word.charAt(i) == 'u' || word.charAt(i) == 't' || word.charAt(i) == 's' || word.charAt(i) == 'r' ||word.charAt(i) == 'o') {
 			//	count+=1;
